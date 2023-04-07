@@ -79,3 +79,32 @@ begin
 end $$
 
 delimiter ;
+
+/*
+Crie uma SP que aumente ou diminua o valor dos preços dos livros de uma editora específica. O aumento pode ser em percentual ou em valor.
+*/
+
+delimiter $$
+
+create procedure alterar_preco_livro(p_cod_editora int, p_valor_unit double = null, p_porcentagem = null, p_op int)
+begin
+
+    if p_op = 1
+    begin
+        if p_valor_unit != null
+            update Livros set valor_unit += p_valor_unit where editora.id = p_cod_editora;
+        if p_porcentagem != null
+            update Livros set valor_unit = valor_unit * (1 + (p_porcentagem / 100)) where editora.id = p_cod_editora;
+    end
+
+    if op = 2
+    begin
+        if p_valor_unit != null
+            update Livros set valor_unit -= p_valor_unit where editora.id = p_cod_editora;
+        if p_porcentagem != null
+            update Livros set valor_unit = valor_unit * (1 - (p_porcentagem / 100)) where editora.id = p_cod_editora;
+    end
+
+end $$
+delimiter ;
+
