@@ -61,20 +61,20 @@ delimiter $$
 
 create procedure atualiza_linha_tabela_livros(p_cod int, p_valor_unit double = null, p_data_publicacao date = null)
 begin
-    if p_valor_unit != null and p_data_publicacao != null
+    if (p_valor_unit != null and p_data_publicacao != null) then
     begin
         update Livros set valor_unit = p_valor_unit, data_publicao = p_data_publicacao where id = p_cod;
-    end
+    end if
 
-    if p_valor_unit != null
+    if (p_valor_unit != null) then
     begin
         update Livros set valor_unit = p_valor_unit where id = p_cod;
-    end
+    end if
 
-    if p_data_publicacao != null
+    if (p_data_publicacao != null) then
     begin 
         update Livros set data_publicao = p_data_publicacao where id = p_cod;
-    end
+    end if
 
 end $$
 
@@ -91,18 +91,26 @@ begin
 
     if p_op = 1
     begin
-        if p_valor_unit != null
+        if (p_valor_unit != null) then
+        begin
             update Livros set valor_unit += p_valor_unit where editora.id = p_cod_editora;
-        if p_porcentagem != null
+        end if
+        if (p_porcentagem != null) then
+        begin
             update Livros set valor_unit = valor_unit * (1 + (p_porcentagem / 100)) where editora.id = p_cod_editora;
+        end if
     end
 
     if op = 2
     begin
-        if p_valor_unit != null
+        if (p_valor_unit != null) then
+        begin
             update Livros set valor_unit -= p_valor_unit where editora.id = p_cod_editora;
-        if p_porcentagem != null
+        end if
+        if (p_porcentagem != null) then
+        begin
             update Livros set valor_unit = valor_unit * (1 - (p_porcentagem / 100)) where editora.id = p_cod_editora;
+        end if
     end
 
 end $$
