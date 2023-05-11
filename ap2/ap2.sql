@@ -129,9 +129,8 @@ select i.nome as nome_ingredientes
     from ingredientes i
     left join receitas r
         on i.id = r.id_ingrediente
-    right join estoque e on i.id = e.id_ingredientes;
+    where r.id_ingrediente is null;
 
--- essa não funciona
 
 -- Crie uma trigger para garantir o controle de estoque dos produtos fabricados.
 -- Quanto um produto for fabricado deve dar saída dos estoque dos ingredientes utilizados.
