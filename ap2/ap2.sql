@@ -157,4 +157,4 @@ where data_producao >= date_sub(current_date(), interval 30 day);
 
 
 -- Desfaça a transação realizada no exercício anterior;
-rollback;
+rollback;                   
